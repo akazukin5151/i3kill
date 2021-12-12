@@ -25,6 +25,6 @@ Be advised that if you run it manually it will close your window. Duh
 
 ## Background
 
-Written in Haskell because it is statically compiled and will not break. One upon a time, one of my Python script crashed because it was running without conda for some reason (I wrote it inside the conda environment). Never again.
+Written in Haskell because it is statically compiled and will not break. Once upon a time, one of my Python script crashed because it was running without conda for some reason (I wrote it inside the conda environment). Never again.
 
 I did prototype with it using `jq` and Python though. So here's the Python script, use it at your own risk. Admittedly, it's only 20 lines long and only depends on the standard library so there should be no risk, but Python gave me PTSD so it's best to build up the reflexes to avoid using it for anything but prototyping.
