@@ -1,0 +1,115 @@
+name:                i3utils
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/akazukin/i3utils#readme
+license:             GPL-3
+license-file:        LICENSE
+author:              Tsui Yik Ching
+maintainer:          tsuiyikching@protonmail.com
+copyright:           2021 Tsui Yik Ching
+category:            Desktop
+build-type:          Simple
+cabal-version:       >=1.10
+extra-source-files:  README.md
+
+library libcore
+  hs-source-dirs:      lib
+  default-language:    Haskell2010
+  exposed-modules:     Lib
+  ghc-options:         -Weverything
+                       -Wno-missing-exported-signatures
+                       -Wno-missing-import-lists
+                       -Wno-missed-specialisations
+                       -Wno-all-missed-specialisations
+                       -Wno-unsafe
+                       -Wno-safe
+                       -Wno-missing-safe-haskell-mode
+                       -Wno-missing-local-signatures
+                       -Wno-monomorphism-restriction
+                       -Wno-implicit-prelude
+                       -Wno-prepositive-qualified-module
+                       -Wno-missing-deriving-strategies
+  build-depends:       base >= 4.7 && < 5,
+                       process >= 1.6.13,
+                       aeson >= 1.5.6.0,
+                       utf8-string >= 1.0.2,
+                       lens == 4.19.*,
+                       lens-aeson == 1.1.*,
+                       vector >= 0.12.3.1,
+                       scientific >= 0.3.7.0,
+                       extra >= 1.7.9
+
+executable i3kill
+  hs-source-dirs:      src/i3kill
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  ghc-options:         -Weverything
+                       -Wno-missing-exported-signatures
+                       -Wno-missing-import-lists
+                       -Wno-missed-specialisations
+                       -Wno-all-missed-specialisations
+                       -Wno-unsafe
+                       -Wno-safe
+                       -Wno-missing-safe-haskell-mode
+                       -Wno-missing-local-signatures
+                       -Wno-monomorphism-restriction
+                       -Wno-implicit-prelude
+                       -Wno-prepositive-qualified-module
+                       -Wno-missing-deriving-strategies
+  build-depends:       base >= 4.7 && < 5,
+                       process >= 1.6.13,
+                       aeson >= 1.5.6.0,
+                       lens == 4.19.*,
+                       lens-aeson == 1.1.*,
+                       vector >= 0.12.3.1,
+                       libcore
+
+executable i3focus
+  hs-source-dirs:      src/i3focus
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  ghc-options:         -Weverything
+                       -Wno-missing-exported-signatures
+                       -Wno-missing-import-lists
+                       -Wno-missed-specialisations
+                       -Wno-all-missed-specialisations
+                       -Wno-unsafe
+                       -Wno-safe
+                       -Wno-missing-safe-haskell-mode
+                       -Wno-missing-local-signatures
+                       -Wno-monomorphism-restriction
+                       -Wno-implicit-prelude
+                       -Wno-prepositive-qualified-module
+                       -Wno-missing-deriving-strategies
+  build-depends:       base >= 4.7 && < 5,
+                       process >= 1.6.13,
+                       vector >= 0.12.3.1,
+                       scientific >= 0.3.7.0,
+                       libcore
+
+executable i3movetab
+  hs-source-dirs:      src/i3movetab
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  ghc-options:         -Weverything
+                       -Wno-missing-exported-signatures
+                       -Wno-missing-import-lists
+                       -Wno-missed-specialisations
+                       -Wno-all-missed-specialisations
+                       -Wno-unsafe
+                       -Wno-safe
+                       -Wno-missing-safe-haskell-mode
+                       -Wno-missing-local-signatures
+                       -Wno-monomorphism-restriction
+                       -Wno-implicit-prelude
+                       -Wno-prepositive-qualified-module
+                       -Wno-missing-deriving-strategies
+  build-depends:       base >= 4.7 && < 5,
+                       process >= 1.6.13,
+                       aeson >= 1.5.6.0,
+                       lens == 4.19.*,
+                       lens-aeson == 1.1.*,
+                       vector >= 0.12.3.1,
+                       scientific >= 0.3.7.0,
+                       libcore

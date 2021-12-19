@@ -3,17 +3,15 @@
 module Main where
 
 import System.Exit               (ExitCode(ExitSuccess, ExitFailure))
-import System.Process            (readProcessWithExitCode, callCommand)
-import Data.Aeson                (decode, Value(Bool, Array))
+import System.Process            (readProcessWithExitCode)
+import Data.Aeson                (Value(Bool, Array))
 import Data.Aeson.Lens           (key, nth)
-import Data.ByteString.Lazy.UTF8 (fromString)
 import Control.Lens              ((^?))
-import Data.Vector               (Vector, (!?), enumFromN)
+import Data.Vector               (Vector, (!?))
 import Control.Monad             ((>=>))
 import Control.Arrow             ((>>>))
-import Control.Monad.Extra       (whenJust)
 import qualified Data.Vector as V
-
+import Lib (parseJSON', runCmd, Window, Workspace, enumerate, getWindows)
 
 main :: IO ()
 main = do
@@ -39,26 +37,11 @@ tryParse =
   >>> getFirstJust)
   >>> runCmd
 
-parseJSON' :: String -> Maybe Value
-parseJSON' = fromString >>> decode
-
-type Workspace = Value
-type Window = Value
-
 getWorkspaces :: Value -> Maybe (Vector Workspace)
 getWorkspaces json = do
   case json ^? key "nodes" . nth 1 . key "nodes" . nth 1 . key "nodes" of
     Just (Array x) -> pure x
     _              -> Nothing
-
-getWindows :: Workspace -> Maybe (Vector Window)
-getWindows json = do
-  case json ^? key "nodes" . nth 0 . key "nodes" of
-    Just (Array x) -> pure x
-    _              -> Nothing
-
-enumerate :: Vector a -> Vector (Int, a)
-enumerate windows = V.zip (enumFromN 0 (V.length windows)) windows
 
 -- Assumes invalid JSON is not focused
 filterFocused :: Vector (Int, Window) -> Vector (Int, Window)
@@ -78,5 +61,3 @@ generateCmd :: (Int, a) -> String
 generateCmd (0, _) = "i3-msg kill"
 generateCmd (_, _) = "i3-msg 'kill; focus left'"
 
-runCmd :: Maybe String -> IO ()
-runCmd = flip whenJust callCommand
